@@ -46,7 +46,7 @@ class HomeRenderer extends Renderer
             'Welcome to ELEC where we share a tiny amount of functionality around World Heritage Sites.',
             '',
             '❤️',
-            'Your IP info: ' . str_replace("\n", '', print_r($response, true)),
+            'Your IP info is: ' . str_replace("\n", '', print_r($response, true)),
         ];
 
         $this->center($lines, $width, $height)
