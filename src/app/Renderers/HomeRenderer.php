@@ -20,11 +20,9 @@ class HomeRenderer extends Renderer
      */
     public function __invoke(App $app): static
     {
-        $width = $app->terminal()->cols() - 8;
-        $height = $app->terminal()->lines() - 2;
-
+        $width = $app->terminal()->cols();
+        $height = $app->terminal()->lines() ;
         $ipIsInternal = $app->isIpInternal();
-        $this->line('Your IP is ' . $app->ip . ' right? ' . ($ipIsInternal ? '🤔' : '👍'));
 
         $name = text(
             label: 'What\'s your first name?',
@@ -48,7 +46,7 @@ class HomeRenderer extends Renderer
             'Welcome to ELEC where we share a tiny amount of functionality around World Heritage Sites.',
             '',
             '❤️',
-            'Your IP info: ' . print_r($response, true),
+            'Your IP info: ' . str_replace("\n", '', print_r($response, true)),
         ];
 
         $this->center($lines, $width, $height)
