@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sqlite3 whc.db <<EOS
+.mode csv
+.import whc-sites-only-english.csv locations
+EOS
