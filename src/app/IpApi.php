@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 class IpApi
@@ -20,7 +22,7 @@ class IpApi
 
         $url = $this->url . '?' . http_build_query([
             'key' => $this->apiKey,
-            'ip' => $ip
+            'ip' => $ip,
         ]);
 
         $response = file_get_contents($url);
