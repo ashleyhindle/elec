@@ -1,4 +1,4 @@
-FROM sammyjo20/ssh-php:latest
+FROM ashleyhindle/ssh-php:latest
 
 # Switch to root
 
@@ -12,6 +12,7 @@ USER root
 
 # Copy all files
 
+COPY .env .env
 COPY ./src ./src
 COPY ./composer.json ./
 

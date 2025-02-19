@@ -9,6 +9,7 @@
 
 # Project dependencies
 /vendor
+.env
 
 # Caches, externally stored stuff, etc
 .php-cs-fixer.cache

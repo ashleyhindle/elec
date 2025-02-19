@@ -5,7 +5,8 @@
     "require": {
         "php": "^8.3",
         "laravel/prompts": "^0.1.24",
-        "joetannenbaum/chewie": "^0.1.2"
+        "joetannenbaum/chewie": "^0.1.2",
+        "vlucas/phpdotenv": "^5.6"
     },
     "autoload": {
         "psr-4": {
@@ -19,8 +20,8 @@
     },
     "authors": [
         {
-            "name": "Your Name",
-            "email": "youremail@example.com"
+            "name": "Ashley Hindle",
+            "email": "hey@ashleyhindle.com"
         }
     ],
     "minimum-stability": "stable",
