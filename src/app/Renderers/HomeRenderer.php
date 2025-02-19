@@ -7,8 +7,8 @@ namespace App\Renderers;
 use App\App;
 use App\IpApi;
 use Chewie\Concerns\Aligns;
-use function Laravel\Prompts\text;
 use function Laravel\Prompts\spin;
+use function Laravel\Prompts\text;
 use Laravel\Prompts\Themes\Default\Renderer;
 
 class HomeRenderer extends Renderer
@@ -30,8 +30,8 @@ class HomeRenderer extends Renderer
             label: 'What\'s your first name?',
             required: true,
             validate: fn (string $value) => match (true) {
-                strlen($value) < 2 => 'Your name should probably be more than 1 character, no?',
-                strlen($value) > 255 => 'Are you friends with Bobby Tables?',
+                mb_strlen($value) < 2 => 'Your name should probably be more than 1 character, no?',
+                mb_strlen($value) > 255 => 'Are you friends with Bobby Tables?',
                 default => null
             },
             hint: 'Just your first name please or we may upset the coding deities.'
