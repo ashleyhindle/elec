@@ -1,6 +1,6 @@
 {
-    "name": "sammyjo20/ssh-php",
-    "description": "The ridiculously simple framework for building PHP SSH apps! 🔥",
+    "name": "ashleyhindle/elec",
+    "description": "World Heritage Sites TUI based explorer",
     "type": "project",
     "require": {
         "php": "^8.3",
