@@ -26,7 +26,7 @@ class IpApiResponse
         $response->city = $data['city'] ?? '';
         $response->continent = $data['continent_name'] ?? '';
         $response->country = $data['country_name'] ?? '';
-        $response->currentTime = new \DateTimeImmutable($data['time_zone']['current_time'] ?? '');
+        $response->currentTime = new \DateTimeImmutable($data['time_zone']['current_time'] ?? new \DateTimeImmutable('now'));
         $response->lat = (float)($data['latitude'] ?? 0);
         $response->lon = (float)($data['longitude'] ?? 0);
         $response->timezone = $data['time_zone']['name'] ?? '';
@@ -39,6 +39,7 @@ class IpApiResponse
         $response = new self;
         $response->ip = $ip;
         $response->error = $error;
+        $response->currentTime = new \DateTimeImmutable('now');
 
         return $response;
     }
