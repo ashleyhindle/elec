@@ -7,58 +7,42 @@ namespace App;
 class IpApi
 {
     protected string $apiKey;
-    protected string $url = 'https://pro.ipapi.org/api_json/one.php';
+    protected string $url = 'https://api.ipgeolocation.io/ipgeo';
 
     public function __construct()
     {
-        $this->apiKey = $_ENV['IPAPI_API_KEY'];
+        $this->apiKey = $_ENV['IPGEOLOCATION_API_KEY'];
     }
 
-    public function get(string $ip): array
+    public function get(string $ip): IpApiResponse
     {
         if (empty($ip)) {
-            return ['error' => 'empty_ip'];
+            return IpApiResponse::error($ip, 'empty_ip');
+        }
+
+        if ($this->isIpInternal($ip)) {
+            return IpApiResponse::error($ip, 'internal_or_invalid_ip');
         }
 
         $url = $this->url . '?' . http_build_query([
-            'key' => $this->apiKey,
+            'apiKey' => $this->apiKey,
             'ip' => $ip,
+            'fields' => 'city,continent_name,country_name,time_zone,latitude,longitude',
         ]);
 
         $response = file_get_contents($url);
 
-        /**
-         * array(14) {
-  ["as"]=>
-  string(27) "AS5089 Virgin Media Limited"
-  ["city"]=>
-  string(7) "Salford"
-  ["country"]=>
-  string(14) "United Kingdom"
-  ["countryCode"]=>
-  string(2) "GB"
-  ["isp"]=>
-  string(12) "Virgin Media"
-  ["lat"]=>
-  float(53.5082)
-  ["lon"]=>
-  float(-2.2648)
-  ["org"]=>
-  string(0) ""
-  ["query"]=>
-  string(11) "86.2.94.106"
-  ["region"]=>
-  string(3) "ENG"
-  ["regionName"]=>
-  string(7) "England"
-  ["status"]=>
-  string(7) "success"
-  ["timezone"]=>
-  string(13) "Europe/London"
-  ["zip"]=>
-  string(2) "M7"
-}
-         */
-        return json_decode($response, true);
+        return IpApiResponse::fromArray($ip, json_decode($response, true));
+    }
+
+    public function isIpInternal(?string $ip = null): bool
+    {
+        // filter_var returns false if the IP is in a private range, otherwise it returns the IP
+        // so if the result is false, the IP is private/internal or invalid
+        return filter_var(
+            $ip,
+            FILTER_VALIDATE_IP,
+            FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
+        ) === false;
     }
 }
