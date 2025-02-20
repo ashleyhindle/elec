@@ -6,13 +6,14 @@ USER root
 
 # You can add any additional PHP extensions by using `RUN apk add [extensions]`.
 
-# RUN apk add php-redis
+RUN apk add php-sqlite3
 
 # --------------------------------------
 
 # Copy all files
 
 COPY .env .env
+COPY ./whc.db ./whc.db
 COPY ./src ./src
 COPY ./composer.json ./
 
