@@ -4,9 +4,10 @@
     "type": "project",
     "require": {
         "php": "^8.3",
-        "laravel/prompts": "^0.1.24",
-        "joetannenbaum/chewie": "^0.1.2",
-        "vlucas/phpdotenv": "^5.6"
+        "laravel/prompts": "^0.3.5",
+        "vlucas/phpdotenv": "^5.6",
+        "illuminate/collections": "^11.43",
+        "joetannenbaum/chewie": "^0.1.11"
     },
     "autoload": {
         "psr-4": {
@@ -46,8 +47,13 @@
         "test": [
             "./vendor/bin/pest"
         ],
-        "run-dev": [
+        "dev": [
             "docker-compose up --build"
+        ],
+        "prec": [
+            "./vendor/bin/php-cs-fixer fix --allow-risky=yes",
+            "./vendor/bin/phpstan analyse",
+            "./vendor/bin/pest"
         ]
     }
 }
