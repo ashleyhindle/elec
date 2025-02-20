@@ -14,4 +14,4 @@ $dotenv->load();
 $db = new SQLite3('whc.db', SQLITE3_OPEN_READONLY);
 $db->enableExceptions(true);
 
-(new App(db: $db, ip: $argv[1] ?? '86.2.94.106'))->prompt();
+(new App(db: $db, ip: $argv[1] ?? '86.2.94.106'))->run()->prompt();
