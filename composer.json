@@ -30,7 +30,8 @@
         "friendsofphp/php-cs-fixer": "^3.60",
         "phpstan/phpstan": "^1.11",
         "pestphp/pest": "^2.34",
-        "symfony/var-dumper": "^7.1"
+        "symfony/var-dumper": "^7.1",
+        "mockery/mockery": "^1.6"
     },
     "config": {
         "allow-plugins": {
