@@ -9,9 +9,9 @@ class IpApi
     protected string $apiKey;
     protected string $url = 'https://api.ipgeolocation.io/ipgeo';
 
-    public function __construct()
+    public function __construct(string $apiKey)
     {
-        $this->apiKey = $_ENV['IPGEOLOCATION_API_KEY'];
+        $this->apiKey = $apiKey;
     }
 
     public function get(string $ip): IpApiResponse
