@@ -50,7 +50,7 @@ class ClosestSitesRenderer extends AppRenderer
             foreach ($rows as $row) {
                 collect($row->shift())
                     ->zip(...$row)
-                    ->map(fn($lines) => $lines->implode(''))
+                    ->map(fn ($lines) => $lines->implode(''))
                     ->each(function ($line) {
                         $this->lines[] = $line;
                     });
