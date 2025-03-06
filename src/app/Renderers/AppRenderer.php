@@ -71,7 +71,7 @@ abstract class AppRenderer extends Renderer
 
         $this->box(
             title: $title,
-            body: $bodyLines->map(fn($line) => trim($line, ' '))->implode(PHP_EOL),
+            body: $bodyLines->map(fn ($line) => trim($line, ' '))->implode(PHP_EOL),
             footer: $footer,
             info: $info,
             color: $color,

@@ -75,7 +75,7 @@ class App extends Prompt
         return text(
             label: 'What\'s your first name?',
             required: true,
-            validate: fn(string $value) => match (true) {
+            validate: fn (string $value) => match (true) {
                 mb_strlen($value) < 2 => 'Your name should probably be more than 1 character, no?',
                 mb_strlen($value) > 255 => 'Are you friends with Bobby Tables?',
                 default => null
@@ -239,7 +239,7 @@ class App extends Prompt
     {
         $cos_lat_2 = (float) pow(cos($lat * pi() / 180), 2);
 
-        $categoryPlaceholders = implode(',', array_map(fn($category) => ':' . mb_strtolower($category), $this->categories));
+        $categoryPlaceholders = implode(',', array_map(fn ($category) => ':' . mb_strtolower($category), $this->categories));
 
         $sql = "SELECT *, ((:lat-latitude)*(:lat-latitude)) + ((:lon-longitude)*(:lon-longitude)) as distance FROM sites WHERE category in ($categoryPlaceholders) ORDER BY ((:lat-latitude)*(:lat-latitude)) + ((:lon-longitude)*(:lon-longitude)*:cos_lat_2) ASC LIMIT :limit";
         $stmt = $this->db->prepare($sql);
