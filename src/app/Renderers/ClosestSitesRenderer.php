@@ -28,7 +28,7 @@ class ClosestSitesRenderer extends AppRenderer
     protected function renderClosestSites(): array
     {
         $closestSitesBoxWidth = (int) floor($this->app->totalWidth / $this->app->columnsPerRow) - 4;
-        $closestSitesBoxHeight = (int) floor($this->app->totalHeight / 2) - 7; // we want to fit opening info, 2 rows of sites, and the footer bar
+        $closestSitesBoxHeight = (int) floor($this->app->totalHeight / 3) - 7; // we want to fit opening info, 3 rows of sites, and the footer bar
         if (count($this->app->closestSites) > 0) {
             $this->lines[] = sprintf('Here are the closest %d %s World Heritage Sites to you: %s', $this->app->numberOfClosestSitesToShow, implode(', ', $this->app->categories), PHP_EOL);
             $siteBoxes = collect($this->app->closestSites)->map(function (Site $site, int $index) use ($closestSitesBoxWidth, $closestSitesBoxHeight) {
@@ -50,7 +50,7 @@ class ClosestSitesRenderer extends AppRenderer
             foreach ($rows as $row) {
                 collect($row->shift())
                     ->zip(...$row)
-                    ->map(fn ($lines) => $lines->implode(''))
+                    ->map(fn($lines) => $lines->implode(''))
                     ->each(function ($line) {
                         $this->lines[] = $line;
                     });

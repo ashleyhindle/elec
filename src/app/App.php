@@ -24,7 +24,7 @@ class App extends Prompt
     public array $closestSites = [];
     public int $siteIndex = 0;
     public ?int $selectedSiteIndex = null;
-    public int $numberOfClosestSitesToShow = 6;
+    public int $numberOfClosestSitesToShow = 9;
     public int $columnsPerRow = 3;
     public int $totalWidth;
     public int $totalHeight;
