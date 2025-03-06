@@ -33,7 +33,6 @@ abstract class AppRenderer extends Renderer
         $this->centerHorizontally($this->getInstructions(), $this->app->totalWidth)->each(function ($line) {
             $this->lines[] = $line;
         });
-        $this->lines[] = PHP_EOL;
 
         return $this->lines;
     }
@@ -72,7 +71,7 @@ abstract class AppRenderer extends Renderer
 
         $this->box(
             title: $title,
-            body: $bodyLines->map(fn ($line) => trim($line, ' '))->implode(PHP_EOL),
+            body: $bodyLines->map(fn($line) => trim($line, ' '))->implode(PHP_EOL),
             footer: $footer,
             info: $info,
             color: $color,
@@ -87,7 +86,7 @@ abstract class AppRenderer extends Renderer
 
     protected function appropriateGreeting(int $hour): string
     {
-        return match(true) {
+        return match (true) {
             $hour >= 0 && $hour < 6 => '🌙 Howdy, burning the midnight oil a little there',
             $hour >= 6 && $hour < 12 => '🌞 Good morning',
             $hour >= 12 && $hour < 18 => '🌆 Good afternoon',

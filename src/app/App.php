@@ -36,7 +36,7 @@ class App extends Prompt
     public function __construct(public SQLite3 $db, public string $ip = '')
     {
         $this->totalWidth = $this->terminal()->cols() - 4;
-        $this->totalHeight = $this->terminal()->lines() - 4;
+        $this->totalHeight = $this->terminal()->lines() - 2;
 
         $this->registerRenderer(ClosestSitesRenderer::class);
     }
@@ -61,9 +61,9 @@ class App extends Prompt
     protected function geoip(): IpApiResponse
     {
         return spin(
-            message: 'Tracing your IP...',
+            message: 'Geolocating with my personal geostationary satellite...',
             callback: function () {
-                usleep(750000);
+                usleep(950000);
 
                 return (new IpApi($_ENV['IPGEOLOCATION_API_KEY']))->get($this->ip);
             }
@@ -75,7 +75,7 @@ class App extends Prompt
         return text(
             label: 'What\'s your first name?',
             required: true,
-            validate: fn (string $value) => match (true) {
+            validate: fn(string $value) => match (true) {
                 mb_strlen($value) < 2 => 'Your name should probably be more than 1 character, no?',
                 mb_strlen($value) > 255 => 'Are you friends with Bobby Tables?',
                 default => null
@@ -149,7 +149,7 @@ class App extends Prompt
                     $this->selectSite();
                 }
 
-                match($key) {
+                match ($key) {
                     'q' => $this->quit(),
                     default => null,
                 };
@@ -239,7 +239,7 @@ class App extends Prompt
     {
         $cos_lat_2 = (float) pow(cos($lat * pi() / 180), 2);
 
-        $categoryPlaceholders = implode(',', array_map(fn ($category) => ':'.mb_strtolower($category), $this->categories));
+        $categoryPlaceholders = implode(',', array_map(fn($category) => ':' . mb_strtolower($category), $this->categories));
 
         $sql = "SELECT *, ((:lat-latitude)*(:lat-latitude)) + ((:lon-longitude)*(:lon-longitude)) as distance FROM sites WHERE category in ($categoryPlaceholders) ORDER BY ((:lat-latitude)*(:lat-latitude)) + ((:lon-longitude)*(:lon-longitude)*:cos_lat_2) ASC LIMIT :limit";
         $stmt = $this->db->prepare($sql);
